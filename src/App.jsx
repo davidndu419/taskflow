@@ -212,13 +212,21 @@ body { font-family: var(--mono); font-size: 13px; overflow-x: hidden; }
   display: flex; align-items: center; gap: 12px; padding: 16px 28px;
   border-bottom: 1px solid var(--border); background: rgba(10,10,15,0.8);
   backdrop-filter: blur(16px); position: sticky; top: 0; z-index: 9;
+  min-height: 72px;
 }
-.topbar-title { font-family: var(--display); font-size: 22px; font-weight: 800; letter-spacing: -0.5px; flex: 1; }
-.topbar-title span { color: var(--text3); font-weight: 400; font-size: 14px; margin-left: 8px; font-family: var(--mono); }
+.topbar-title { 
+  font-family: var(--display); font-size: 22px; font-weight: 800; 
+  letter-spacing: -0.5px; flex: 1; display: flex; align-items: center;
+  line-height: 1;
+}
+.topbar-title span { 
+  color: var(--text3); font-weight: 400; font-size: 14px; 
+  margin-left: 8px; font-family: var(--mono); 
+}
 .search-box {
   display: flex; align-items: center; gap: 8px; background: var(--bg3);
   border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 12px;
-  transition: all 0.2s; width: 220px;
+  transition: all 0.2s; width: 220px; height: 40px;
 }
 .search-box:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
 .search-box input { background: none; border: none; outline: none; font-family: var(--mono); font-size: 12px; color: var(--text); width: 100%; }
@@ -228,6 +236,7 @@ body { font-family: var(--mono); font-size: 13px; overflow-x: hidden; }
   display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px;
   border-radius: var(--radius-sm); border: none; cursor: pointer; font-family: var(--mono);
   font-size: 12px; font-weight: 700; transition: all 0.15s; letter-spacing: 0.5px;
+  height: 40px;
 }
 .btn-primary { background: var(--accent); color: white; }
 .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); box-shadow: 0 4px 20px var(--accent-glow); }
@@ -235,7 +244,7 @@ body { font-family: var(--mono); font-size: 13px; overflow-x: hidden; }
 .btn-ghost:hover { background: var(--bg3); color: var(--text); border-color: var(--border2); }
 .btn-danger { background: rgba(255,59,59,0.15); color: var(--red); border: 1px solid rgba(255,59,59,0.2); }
 .btn-danger:hover { background: rgba(255,59,59,0.25); }
-.btn-sm { padding: 5px 10px; font-size: 11px; }
+.btn-sm { padding: 5px 10px; font-size: 11px; height: 32px; }
 .btn-icon { padding: 7px; }
 
 /* CONTENT */
@@ -506,13 +515,19 @@ select.form-input option { background: var(--bg2); }
 .ai-send:hover { background: var(--accent2); }
 .ai-send:disabled { opacity: 0.5; cursor: not-allowed; }
 
-/* ACCOUNT MENU */
-.account-btn {
-  display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: var(--radius-sm);
-  background: var(--bg3); border: 1px solid var(--border); cursor: pointer; transition: all 0.15s;
-  font-family: var(--mono); font-size: 12px; color: var(--text2); position: relative;
-}
-.account-btn:hover { border-color: var(--accent); }
+/* SETTINGS VIEW */
+.settings-view { display: flex; flex-direction: column; gap: 20px; max-width: 800px; }
+.settings-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+.settings-card-title { font-family: var(--display); font-size: 16px; font-weight: 700; margin-bottom: 20px; color: var(--text); }
+.settings-item-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.settings-item-label { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.settings-item-desc { font-size: 11px; color: var(--text3); line-height: 1.5; }
+.form-hint { font-size: 10px; color: var(--text3); margin-top: 6px; }
+.settings-about { display: flex; flex-direction: column; gap: 12px; }
+.settings-about-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.settings-about-item:last-child { border-bottom: none; }
+.settings-about-label { font-size: 12px; color: var(--text2); }
+.settings-about-value { font-size: 12px; font-weight: 700; color: var(--text); font-family: var(--mono); }
 
 /* MOBILE RESPONSIVE */
 @media (max-width: 768px) {
@@ -522,6 +537,7 @@ select.form-input option { background: var(--bg2); }
   .hamburger {
     display: flex; flex-direction: column; gap: 4px; background: none; border: none;
     cursor: pointer; padding: 8px; border-radius: 6px; transition: all 0.2s;
+    height: 40px; justify-content: center;
   }
   .hamburger span {
     width: 20px; height: 2px; background: var(--text); border-radius: 2px;
@@ -564,9 +580,9 @@ select.form-input option { background: var(--bg2); }
   .topbar-title { font-size: 18px; flex: 1; margin-bottom: 0; }
   .topbar-title span { display: inline; margin-left: 8px; }
   
-  .search-box { width: 100%; max-width: none; order: 10; margin-top: 12px; }
-  .btn { padding: 7px 12px; font-size: 11px; }
-  .btn-sm { padding: 5px 8px; font-size: 10px; }
+  .search-box { width: 100%; max-width: none; order: 10; margin-top: 12px; height: 44px; }
+  .btn { padding: 7px 12px; font-size: 11px; height: 44px; }
+  .btn-sm { padding: 5px 8px; font-size: 10px; height: 36px; }
   
   .content { padding: 16px; }
   
@@ -613,6 +629,10 @@ select.form-input option { background: var(--bg2); }
   .quick-stats { flex-direction: column; gap: 8px; }
   .qstat { padding: 8px 12px; }
   .qstat-val { font-size: 18px; }
+  
+  .settings-view { max-width: 100%; }
+  .settings-card { padding: 16px; }
+  .settings-item-row { flex-direction: column; align-items: flex-start; }
 }
 
 /* Hide hamburger on desktop */
@@ -629,30 +649,7 @@ select.form-input option { background: var(--bg2); }
   .task-card { padding: 10px; }
   .modal-body { padding: 12px; }
   .priority-grid { grid-template-columns: 1fr; }
-}); color: var(--text); }
-.account-avatar { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
-.account-dropdown {
-  position: absolute; top: calc(100% + 8px); right: 0; background: var(--bg2); border: 1px solid var(--border2);
-  border-radius: var(--radius); box-shadow: 0 8px 32px rgba(0,0,0,0.5); min-width: 260px; z-index: 200;
-  animation: slideIn 0.2s ease; overflow: hidden;
 }
-.account-header { padding: 16px; border-bottom: 1px solid var(--border); }
-.account-greeting { font-size: 11px; color: var(--text3); margin-bottom: 4px; }
-.account-name { font-family: var(--display); font-size: 16px; font-weight: 700; color: var(--text); }
-.account-menu { padding: 8px; }
-.account-menu-item {
-  display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: var(--radius-sm);
-  cursor: pointer; transition: all 0.15s; font-size: 12px; color: var(--text2); border: none;
-  background: transparent; width: 100%; text-align: left;
-}
-.account-menu-item:hover { background: var(--bg3); color: var(--text); }
-.account-menu-item.danger { color: var(--red); }
-.account-menu-item.danger:hover { background: rgba(255,59,59,0.1); }
-.account-menu-item .icon { font-size: 14px; width: 18px; text-align: center; }
-.settings-section { padding: 16px; }
-.settings-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 12px; font-family: var(--display); }
-.settings-item { margin-bottom: 12px; }
-.settings-item:last-child { margin-bottom: 0; }
 `;
 
 // ============================================================
@@ -1223,97 +1220,6 @@ function AIAssistantPanel({ tasks }) {
 // ============================================================
 // MAIN APP
 // ============================================================
-// ============================================================
-// ACCOUNT MENU COMPONENT
-// ============================================================
-function AccountMenu({ userName, onNameChange, onClearAll }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [showSettings, setShowSettings] = useState(false);
-  const [nameInput, setNameInput] = useState(userName);
-  const menuRef = useRef(null);
-
-  useEffect(() => {
-    function handleClickOutside(e) {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setIsOpen(false);
-        setShowSettings(false);
-      }
-    }
-    if (isOpen) document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isOpen]);
-
-  const handleSaveName = () => {
-    onNameChange(nameInput);
-    setShowSettings(false);
-  };
-
-  const handleClearAll = () => {
-    if (confirm("Are you sure you want to clear all tasks? This action cannot be undone.")) {
-      onClearAll();
-      setIsOpen(false);
-    }
-  };
-
-  const initials = userName ? userName.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2) : "?";
-  const displayName = userName || "Guest";
-
-  return (
-    <div style={{ position: "relative" }} ref={menuRef}>
-      <button className="account-btn" onClick={() => setIsOpen(!isOpen)}>
-        <div className="account-avatar">{initials}</div>
-        <span>{displayName}</span>
-        <span style={{ fontSize: 10 }}>▾</span>
-      </button>
-      {isOpen && (
-        <div className="account-dropdown">
-          {!showSettings ? (
-            <>
-              <div className="account-header">
-                <div className="account-greeting">Welcome back,</div>
-                <div className="account-name">{displayName}</div>
-              </div>
-              <div className="account-menu">
-                <button className="account-menu-item" onClick={() => setShowSettings(true)}>
-                  <span className="icon">⚙</span>
-                  Settings
-                </button>
-                <button className="account-menu-item danger" onClick={handleClearAll}>
-                  <span className="icon">🗑</span>
-                  Clear All Tasks
-                </button>
-              </div>
-            </>
-          ) : (
-            <div className="settings-section">
-              <div className="settings-title">Account Settings</div>
-              <div className="settings-item">
-                <div className="form-group">
-                  <label className="form-label">Your Name</label>
-                  <input
-                    className="form-input"
-                    placeholder="Enter your name"
-                    value={nameInput}
-                    onChange={e => setNameInput(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div style={{ display: "flex", gap: 8, marginTop: 16 }}>
-                <button className="btn btn-ghost btn-sm" onClick={() => setShowSettings(false)}>
-                  Back
-                </button>
-                <button className="btn btn-primary btn-sm" onClick={handleSaveName}>
-                  Save
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-      )}
-    </div>
-  );
-}
-
 export default function App() {
   const [tasks, setTasks] = useState(() => DB.load());
   const [reminders, setReminders] = useState(() => DB.loadReminders());
@@ -1485,6 +1391,7 @@ export default function App() {
     { id: "analytics", icon: "◈", label: "Analytics" },
     { id: "calendar", icon: "⬚", label: "Calendar" },
     { id: "ai", icon: "✦", label: "AI Assistant" },
+    { id: "settings", icon: "⚙", label: "Settings" },
   ];
 
   return (
@@ -1545,6 +1452,7 @@ export default function App() {
             {view === "analytics" && <>Analytics <span>insights & trends</span></>}
             {view === "calendar" && <>Calendar <span>deadline view</span></>}
             {view === "ai" && <>AI Assistant <span>smart scheduling</span></>}
+            {view === "settings" && <>Settings <span>preferences</span></>}
           </div>
           {view === "tasks" && (
             <div className="search-box">
@@ -1554,7 +1462,6 @@ export default function App() {
           )}
           {tasks.length === 0 && <button className="btn btn-ghost btn-sm" onClick={seedDemo}>Load Demo</button>}
           <button className="btn btn-primary" onClick={openNew}>+ New Task</button>
-          <AccountMenu userName={userName} onNameChange={handleNameChange} onClearAll={handleClearAll} />
         </div>
 
         {/* CONTENT */}
@@ -1620,6 +1527,52 @@ export default function App() {
           {view === "analytics" && <AnalyticsView tasks={tasks} />}
           {view === "calendar" && <CalendarView tasks={tasks} onTaskClick={openEdit} />}
           {view === "ai" && <AIAssistantPanel tasks={tasks} />}
+          {view === "settings" && (
+            <div className="settings-view">
+              <div className="settings-card">
+                <div className="settings-card-title">Account</div>
+                <div className="form-group">
+                  <label className="form-label">Your Name</label>
+                  <input
+                    className="form-input"
+                    placeholder="Enter your name"
+                    value={userName}
+                    onChange={e => handleNameChange(e.target.value)}
+                  />
+                  <div className="form-hint">This name will be used to personalize your experience</div>
+                </div>
+              </div>
+              
+              <div className="settings-card">
+                <div className="settings-card-title">Data Management</div>
+                <div className="settings-item-row">
+                  <div>
+                    <div className="settings-item-label">Clear All Tasks</div>
+                    <div className="settings-item-desc">Permanently delete all tasks and start fresh</div>
+                  </div>
+                  <button className="btn btn-danger btn-sm" onClick={handleClearAll}>Clear All</button>
+                </div>
+              </div>
+              
+              <div className="settings-card">
+                <div className="settings-card-title">About</div>
+                <div className="settings-about">
+                  <div className="settings-about-item">
+                    <span className="settings-about-label">Version</span>
+                    <span className="settings-about-value">1.0.0</span>
+                  </div>
+                  <div className="settings-about-item">
+                    <span className="settings-about-label">Total Tasks</span>
+                    <span className="settings-about-value">{totalCount}</span>
+                  </div>
+                  <div className="settings-about-item">
+                    <span className="settings-about-label">Completed</span>
+                    <span className="settings-about-value">{completedCount}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
