@@ -1,0 +1,17 @@
+{
+  "name": "TaskFlow Intelligent Planner",
+  "short_name": "TaskFlow",
+  "description": "Progressive Web App for intelligent task management",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0a0a0b",
+  "theme_color": "#6d5dfc",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

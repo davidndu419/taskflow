@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { model } from "./lib/gemini";
 import { Task } from "./models";
 import { GLOBAL_CSS } from "./styles";
+import { getSWRegistration } from "./main";
 
 
 
@@ -95,25 +96,51 @@ const DB = {
 const SAFETY_WINDOW_MS = 60 * 1000; // Only fire if trigger point was within last 60 seconds
 
 function fireNotification(title, body, addNotif, notifType) {
-  // Try browser Notification API first
-  if ("Notification" in window && Notification.permission === "granted") {
-    try {
-      const n = new Notification(title, {
-        body,
-        icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📌</text></svg>",
-        tag: `taskflow-${notifType}-${Date.now()}`,
-        silent: false,
-      });
-      n.onclick = () => { window.focus(); n.close(); };
-    } catch {}
+  // Try Service Worker notification first (best for PWA/Mobile)
+  const registration = getSWRegistration();
+  
+  if (registration && "showNotification" in registration && Notification.permission === "granted") {
+    registration.showNotification(title, {
+      body,
+      icon: "/favicon.svg",
+      badge: "/favicon.svg",
+      tag: `taskflow-${notifType}`,
+      renotify: true,
+      vibrate: [200, 100, 200],
+    }).catch(err => {
+      console.error("SW notification failed, falling back to legacy:", err);
+      fallbackNotification(title, body, notifType);
+    });
+  } else if ("Notification" in window && Notification.permission === "granted") {
+    fallbackNotification(title, body, notifType);
   }
+
   // Always also show in-app toast as fallback/supplement
   addNotif({ type: notifType, title, message: body });
 }
 
-function requestNotificationPermission() {
-  if ("Notification" in window && Notification.permission === "default") {
-    Notification.requestPermission();
+function fallbackNotification(title, body, notifType) {
+  try {
+    const n = new Notification(title, {
+      body,
+      icon: "/favicon.svg",
+      tag: `taskflow-${notifType}-${Date.now()}`,
+      silent: false,
+    });
+    n.onclick = () => { window.focus(); n.close(); };
+  } catch {}
+}
+
+async function requestNotificationPermission() {
+  if (!("Notification" in window)) return;
+  
+  if (Notification.permission === "default") {
+    try {
+      const permission = await Notification.requestPermission();
+      console.log("Notification permission state:", permission);
+    } catch (err) {
+      console.error("Error requesting notification permission:", err);
+    }
   }
 }
 
