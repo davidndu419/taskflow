@@ -1,99 +1,70 @@
-# TaskFlow - Intelligent Task Planner
+# TaskFlow - Intelligent Task & Inventory Planner
+A modern, offline-first task management application built with React 19 and Vite, featuring AI-powered scheduling and robust inventory logic.
 
-A modern, mobile-first task management application built with React and Vite, featuring AI-powered scheduling, analytics, and smart reminders.
+🚀 Key Features
+Offline-First Persistence: Leverages LocalStorage for seamless use without an active internet connection.
 
-## Features
+AI Task Assistant: Integrated with Google Gemini 1.5 Flash for smart scheduling and productivity insights.
 
-- ✅ Task Management with priorities (Critical, High, Medium, Low)
-- 📊 Analytics Dashboard with insights and trends
-- 📅 Calendar View with deadline tracking
-- 🤖 AI Assistant for smart scheduling
-- 🔔 Smart Reminders (10min, 1hr before deadline)
-- 📱 Mobile-First Design
-- 🎨 Dark Theme UI
-- 💾 Local Storage Persistence
+Dynamic Inventory Logic: Custom algorithms for task urgency scoring and category-based organization.
 
-## Tech Stack
+Analytics Dashboard: Real-time visualization of productivity trends and completion rates.
 
-- React 19
-- Vite 8
-- Vercel Analytics
-- Firebase (configured)
+Mobile-First UI: Fully responsive design optimized for touch interfaces.
 
-## Getting Started
+🛠 Tech Stack
+Frontend: React 19, Tailwind CSS
 
-### Prerequisites
+Build Tool: Vite 8
 
-- Node.js 18+ 
-- npm or yarn
+AI Engine: Google Gemini SDK (v1)
 
-### Installation
+Deployment: Vercel + Vercel Analytics
 
+📂 Project Structure
+The project follows a modular architecture to ensure separation of concerns:
+
+```plaintext
+taskflow/
+├── doc/                 # Technical documentation and audit logs
+├── src/
+│   ├── lib/
+│   │   └── gemini.js    # Gemini AI configuration and safety guards
+│   ├── models.js        # Business logic: Task classes and scoring algorithms
+│   ├── styles.js        # Global UI/UX styling and CSS-in-JS
+│   ├── App.jsx          # Core application state and routing
+│   └── main.jsx         # Entry point
+├── .env.example         # Template for environment variables
+└── .gitignore           # Security rules for sensitive files
+```
+
+⚙️ Getting Started
+1. Prerequisites
+Node.js 18+
+
+A Google AI Studio API Key (for Gemini features)
+
+2. Installation & Setup
 ```bash
+# Clone the repository
+git clone [your-repo-url]
+
 # Install dependencies
 npm install
 
-# Run development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
+# Setup Environment Variables
+cp .env.example .env
+# Edit .env and add your VITE_GEMINI_API_KEY
 ```
 
-## Deployment
-
-### Deploy to Vercel (Recommended)
-
-1. Push your code to GitHub
-2. Go to [Vercel](https://vercel.com)
-3. Click "New Project"
-4. Import your GitHub repository
-5. Vercel will auto-detect Vite and configure build settings
-6. Click "Deploy"
-
-Your site will be live in minutes! Vercel Analytics will automatically start tracking page views.
-
-### Manual Deployment
-
+3. Run Locally
 ```bash
-# Build the project
-npm run build
-
-# The dist/ folder contains your production-ready files
-# Upload the contents to any static hosting service
+npm run dev
 ```
 
-## Project Structure
+🛡 Security & Best Practices
+Environment Protection: All API keys are managed via .env files and are strictly excluded from version control.
 
-```
-taskflow/
-├── src/
-│   ├── App.jsx          # Main application component
-│   ├── main.jsx         # Entry point with Analytics
-│   ├── index.css        # Global styles
-│   └── assets/          # Images and icons
-├── public/              # Static assets
-├── dist/                # Production build (generated)
-└── package.json         # Dependencies
-```
+Modular Design: Separated business logic from UI components to improve testability and maintainability.
 
-## Usage
-
-### Creating Tasks
-- Click "+ New Task" button
-- Fill in title, description, priority, deadline, and category
-- Tasks are automatically saved to local storage
-
-### Views
-- **Tasks**: Main task list with filters and search
-- **Analytics**: View productivity insights and trends
-- **Calendar**: See tasks organized by deadline
-- **AI Assistant**: Get smart scheduling suggestions
-- **Settings**: Manage your account and preferences
-
-## License
-
-MIT
+Error Boundaries: Implemented graceful fallbacks for AI services to ensure core functionality remains available during network outages.
